@@ -1,0 +1,29 @@
+{
+  "name": "slacktron",
+  "version": "1.0.0",
+  "description": "A template for a Slackbot using Azure Functions",
+  "repository": {
+    "url": "https://github.com/merlinbecker/slacktron"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prestart": "npm run build",
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/cosmos": "^3.17.3",
+    "@azure/functions": "^4.0.0-alpha.7",
+    "@slack/bolt": "^3.13.2",
+    "applicationinsights": "^2.7.0",
+    "moment": "^2.29.4",
+    "uuid4": "^2.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "typescript": "^4.0.0"
+  },
+  "main": "dist/src/functions/*.js"
+}

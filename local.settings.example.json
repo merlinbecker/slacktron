@@ -1,0 +1,18 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "APP_INSIGHTS_KEY HERE",
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=xxxx;IngestionEndpoint=xxx/;LiveEndpoint=xxxxxx/",
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
+    "AzureWebJobsStorage": "",
+
+    "SLACK_BOT_TOKEN": "YOUR_BOT_USER_OAuth_TOKEN_FROM_OAUTH&PERMISSIONS",
+    "SLACK_SIGNING_SECRET": "SIGNING_SECRET_FROM_APP_CREDENTIALS",
+
+    "COSMOS_ENDPOINT": "COSMOSDB_URI_FROM_OVERVIEW",
+    "COSMOS_KEY": "COSMOSDB_KEY_FROM_KEYS",
+    "COSMOS_DB_NAME": "YOUR_COSMOS_DB_NAME",
+    "COSMOS_CONTAINER_NAME": "YOUR_COSMOS_CONTAINER_NAME"
+  }
+}
