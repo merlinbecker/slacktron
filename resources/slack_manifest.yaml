@@ -9,7 +9,7 @@ features:
     always_online: true
   slash_commands:
     - command: /version
-      url: https://thoughttron.azurewebsites.net/api/slack/events?code=hGSPETSL3lHqwY4jnhBlqdbaP0zhONspJZHuslqDc5TOAzFuA4Wbpw==
+      url: <URL_TO_DEPLOYED_SLACKTRON_HERE>
       description: get the version of the bot
       should_escape: false
 oauth_config:
@@ -26,7 +26,7 @@ oauth_config:
       - mpim:write
 settings:
   event_subscriptions:
-    request_url: https://7071-merlinbecker-slacktron-r1mlf35gnv4.ws-eu107.gitpod.io/api/slack/events
+    request_url: <URL_TO_DEPLOYED_SLACKTRON_HERE>
     bot_events:
       - message.channels
       - message.im
