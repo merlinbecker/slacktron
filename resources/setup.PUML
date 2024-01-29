@@ -1,0 +1,34 @@
+@startuml
+!include <C4/C4_Container>
+!include <C4/C4_Component>
+!include <C4/C4_Dynamic>
+
+!include <logos/slack-icon>
+
+!define AzurePuml https://raw.githubusercontent.com/plantuml-stdlib/Azure-PlantUML/release/2-2/dist
+!includeurl AzurePuml/AzureRaw.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Databases/AzureCosmosDb.puml
+
+sprite $merlin [48x48/8z] {
+tTC53aCX00JHYSxzJrmt92pKsuryuU7WtmKeNeA-HcM1G_PGLCd-LkSAD94b3f_tzQ_Wstz3x-EUWRV9htl7VccBwMU6kzQ-h_Mgh_3UWdo5QVOC7VjsMqcU
+KuwMeN_uFBXmuPlcqmsUzb3uN27mainphS-_AHGnPy135VymMm
+}
+
+left to right direction
+
+Person(merlin, "Merlin", "Merlin chatting with Chatbot",$sprite="merlin")
+System_Ext(slack,"Slack Messenger","slack on smartphone or computer, installed chatbot app on workspace",$sprite="slack-icon")
+System_Boundary(azure,"Azure Subscription","Azure Subscription with resources in resource group"){
+     Container(function,"Azure FunctionApp","HTTP-Trigger with bolt.js framework and middleware",$sprite="AzureFunction")
+     ContainerDb(cosmos,"Azure Cosmos DB","store messages to not process them twice",$sprite="AzureCosmosDb")
+}
+
+Rel(merlin,slack,"'Hello Slacktron'")
+Rel(slack,function,"forward message to app")
+Rel(function,cosmos,"check, if message was already sent")
+Rel(cosmos,function,"no entry for this message")
+Rel(function,function,"process message")
+Rel(function,slack,"ack message and send answer")
+Rel(slack,merlin,"'nortkcalS olleH'")
+@enduml

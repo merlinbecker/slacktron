@@ -18,7 +18,7 @@ async function streamToString(stream): Promise<string> {
     return buffer.toString("utf-8")
 }
 
-export class AzReceiver {
+export class AzureFunctionsReceiver {
     private bolt!: App;
     constructor(private signingSecret: string, private log: (message: string) => void) {
     }

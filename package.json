@@ -11,19 +11,24 @@
     "watch": "tsc -w",
     "prestart": "npm run build",
     "start": "func start",
-    "test": "echo \"No tests yet...\""
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage --coverageDirectory=\"./coverage\""
   },
   "dependencies": {
-    "@azure/cosmos": "^3.17.3",
-    "@azure/functions": "^4.0.0-alpha.7",
-    "@slack/bolt": "^3.13.2",
-    "applicationinsights": "^2.7.0",
+    "@azure/cosmos": "^4.0.0",
+    "@azure/functions": "^4.0.1",
+    "@slack/bolt": "^3.14.0",
+    "applicationinsights": "^2.9.2",
     "moment": "^2.29.4",
     "uuid4": "^2.0.3"
   },
   "devDependencies": {
-    "@types/node": "^18.x",
-    "typescript": "^4.0.0"
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20.8.10",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.2.2"
   },
   "main": "dist/src/functions/*.js"
 }

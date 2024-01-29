@@ -1,8 +1,8 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "APPINSIGHTS_INSTRUMENTATIONKEY": "APP_INSIGHTS_KEY HERE",
     "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=xxxx;IngestionEndpoint=xxx/;LiveEndpoint=xxxxxx/",
+    "SERVICENAME":"THE_NAME_OF_YOUR_SERVICE",
     "FUNCTIONS_WORKER_RUNTIME": "node",
     "AzureWebJobsFeatureFlags": "EnableWorkerIndexing",
     "AzureWebJobsStorage": "",
