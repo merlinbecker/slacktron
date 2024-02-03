@@ -1,0 +1,15 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_slacktron_name": {
+            "value": null
+        },
+        "serverfarms_ASP_slacktron_9535_name": {
+            "value": null
+        },
+        "storageAccounts_saslacktron_name": {
+            "value": null
+        }
+    }
+}
