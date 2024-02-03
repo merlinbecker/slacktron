@@ -189,7 +189,7 @@
                 "vnetContentShareEnabled": false,
                 "siteConfig": {
                     "numberOfWorkers": 1,
-                    "linuxFxVersion": "Node|18",
+                    "linuxFxVersion": "NODE|20",
                     "acrUseManagedIdentityCreds": false,
                     "alwaysOn": false,
                     "http20Enabled": false,
@@ -220,7 +220,7 @@
                 "[resourceId('Microsoft.Web/sites', parameters('sites_slacktron_name'))]"
             ],
             "tags": {
-            },
+             },
             "properties": {
                 "allow": true
             }
@@ -262,15 +262,16 @@
                     "index.php"
                 ],
                 "netFrameworkVersion": "v4.0",
-                "linuxFxVersion": "Node|18",
+                "linuxFxVersion": "NODE|20",
                 "requestTracingEnabled": false,
                 "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
                 "httpLoggingEnabled": false,
                 "acrUseManagedIdentityCreds": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
                 "publishingUsername": "$slacktron",
-                "scmType": "GitHubAction",
+                "scmType": "None",
                 "use32BitWorkerProcess": false,
                 "webSocketsEnabled": false,
                 "alwaysOn": false,
@@ -394,6 +395,34 @@
         {
             "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
             "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('storageAccounts_saslacktron_name'), '/default/slacktron-20569866')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageAccounts_saslacktron_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_saslacktron_name'))]"
+            ],
+            "properties": {
+                "accessTier": "TransactionOptimized",
+                "shareQuota": 5120,
+                "enabledProtocols": "SMB"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+            "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('storageAccounts_saslacktron_name'), '/default/slacktron-20569866acd5')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageAccounts_saslacktron_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_saslacktron_name'))]"
+            ],
+            "properties": {
+                "accessTier": "TransactionOptimized",
+                "shareQuota": 5120,
+                "enabledProtocols": "SMB"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/fileServices/shares",
+            "apiVersion": "2023-01-01",
             "name": "[concat(parameters('storageAccounts_saslacktron_name'), '/default/slacktronb89a')]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts/fileServices', parameters('storageAccounts_saslacktron_name'), 'default')]",
@@ -403,6 +432,209 @@
                 "accessTier": "TransactionOptimized",
                 "shareQuota": 5120,
                 "enabledProtocols": "SMB"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/slots",
+            "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('sites_slacktron_name'), '/develop')]",
+            "location": "Germany West Central",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_slacktron_name'))]",
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_ASP_slacktron_9535_name'))]"
+            ],
+            "kind": "functionapp,linux",
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "slacktron-develop.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "slacktron-develop.scm.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_ASP_slacktron_9535_name'))]",
+                "reserved": true,
+                "isXenon": false,
+                "hyperV": false,
+                "vnetRouteAllEnabled": false,
+                "vnetImagePullEnabled": false,
+                "vnetContentShareEnabled": false,
+                "siteConfig": {
+                    "numberOfWorkers": 1,
+                    "linuxFxVersion": "NODE|20",
+                    "acrUseManagedIdentityCreds": false,
+                    "alwaysOn": false,
+                    "http20Enabled": false,
+                    "functionAppScaleLimit": 200,
+                    "minimumElasticInstanceCount": 0
+                },
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "clientCertMode": "Required",
+                "hostNamesDisabled": false,
+                "customDomainVerificationId": "2E6FB1D124A11133B6F40F2DFE93C98DB0405307DD861B2C50A446B76FBCE568",
+                "containerSize": 1536,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": true,
+                "redundancyMode": "None",
+                "publicNetworkAccess": "Enabled",
+                "storageAccountRequired": false,
+                "keyVaultReferenceIdentity": "SystemAssigned"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('sites_slacktron_name'), '/develop/ftp')]",
+            "location": "Germany West Central",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites/slots', parameters('sites_slacktron_name'), 'develop')]",
+                "[resourceId('Microsoft.Web/sites', parameters('sites_slacktron_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/basicPublishingCredentialsPolicies",
+            "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('sites_slacktron_name'), '/develop/scm')]",
+            "location": "Germany West Central",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites/slots', parameters('sites_slacktron_name'), 'develop')]",
+                "[resourceId('Microsoft.Web/sites', parameters('sites_slacktron_name'))]"
+            ],
+            "properties": {
+                "allow": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/config",
+            "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('sites_slacktron_name'), '/develop/web')]",
+            "location": "Germany West Central",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites/slots', parameters('sites_slacktron_name'), 'develop')]",
+                "[resourceId('Microsoft.Web/sites', parameters('sites_slacktron_name'))]"
+            ],
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php",
+                    "hostingstart.html"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "linuxFxVersion": "NODE|20",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "remoteDebuggingVersion": "VS2019",
+                "httpLoggingEnabled": false,
+                "acrUseManagedIdentityCreds": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$slacktron__develop",
+                "scmType": "GitHubAction",
+                "use32BitWorkerProcess": false,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetRouteAllEnabled": false,
+                "vnetPrivatePortsCount": 0,
+                "publicNetworkAccess": "Enabled",
+                "cors": {
+                    "allowedOrigins": [
+                        "https://portal.azure.com"
+                    ],
+                    "supportCredentials": false
+                },
+                "localMySqlEnabled": false,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 2147483647,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "scmMinTlsVersion": "1.2",
+                "ftpsState": "FtpsOnly",
+                "preWarmedInstanceCount": 0,
+                "functionAppScaleLimit": 200,
+                "functionsRuntimeScaleMonitoringEnabled": false,
+                "minimumElasticInstanceCount": 0,
+                "azureStorageAccounts": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/functions",
+            "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('sites_slacktron_name'), '/develop/slackevents')]",
+            "location": "Germany West Central",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites/slots', parameters('sites_slacktron_name'), 'develop')]",
+                "[resourceId('Microsoft.Web/sites', parameters('sites_slacktron_name'))]"
+            ],
+            "properties": {
+                "script_href": "https://slacktron-develop.azurewebsites.net/admin/vfs/home/site/wwwroot/slackevents.js",
+                "test_data_href": "https://slacktron-develop.azurewebsites.net/admin/vfs/tmp/FunctionsData/slackevents.dat",
+                "href": "https://slacktron-develop.azurewebsites.net/admin/functions/slackevents",
+                "config": {},
+                "invoke_url_template": "https://slacktron-develop.azurewebsites.net/api/slack/events",
+                "language": "node",
+                "isDisabled": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/slots/hostNameBindings",
+            "apiVersion": "2023-01-01",
+            "name": "[concat(parameters('sites_slacktron_name'), '/develop/', parameters('sites_slacktron_name'), '-develop.azurewebsites.net')]",
+            "location": "Germany West Central",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites/slots', parameters('sites_slacktron_name'), 'develop')]",
+                "[resourceId('Microsoft.Web/sites', parameters('sites_slacktron_name'))]"
+            ],
+            "properties": {
+                "siteName": "slacktron(develop)",
+                "hostNameType": "Verified"
             }
         }
     ]
